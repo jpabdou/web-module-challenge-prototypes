@@ -32,7 +32,7 @@ Person.prototype.poop = function(){
 };
 
 Person.prototype.toString =  function() {
-  return `${this.name}, ${this.age}`
+  return `${this.name}, ${this.age}`;
 }
 
 /*
@@ -59,7 +59,7 @@ function Car(model, milesPerGallon) {
 }
 
 Car.prototype.fill = function(gallons) {
-  this.tank += gallons
+  this.tank += gallons;
 
 }
 
@@ -68,14 +68,13 @@ Car.prototype.drive = function(distance) {
   if (this.tank <= 0 ) {
     let diffDist = this.tank*this.milesPerGallon;
     distance = distance +diffDist;
-    this.odometer += distance
-    return `I ran out of fuel at ${this.odometer} miles!`
+    this.odometer += distance;
+    return `I ran out of fuel at ${this.odometer} miles!`;
   } else{
-    this.odometer += distance
+    this.odometer += distance;
   }
 }
 
-const car1 = new Car("Camry", 25)
 
 
 /*
@@ -87,15 +86,14 @@ const car1 = new Car("Camry", 25)
 */
 
 function Baby(name, age, favoriteToy) {
-  this.name = name;
-  this.age = age;
+  Person.call(this, name, age);
   this.favoriteToy = favoriteToy;
 
 }
 
 Baby.prototype = Object.create(Person.prototype)
 Baby.prototype.play = function() {
-  return `Playing with ${this.favoriteToy}`
+  return `Playing with ${this.favoriteToy}`;
 }
 
 
