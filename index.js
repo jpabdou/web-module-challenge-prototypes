@@ -15,10 +15,25 @@
         + It should return a string with `name` and `age`. Example: "Mary, 50"
 */
 
-function Person() {
-
+function Person(name, age) {
+  this.name = name;
+  this.age = age;
+  this.stomach = [];
 }
 
+Person.prototype.eat = function (food){
+  if (this.stomach.length < 10) {
+    this.stomach.push(food);
+  }
+};
+
+Person.prototype.poop = function(){
+  this.stomach = [];
+};
+
+Person.prototype.toString =  function() {
+  return `${this.name}, ${this.age}`
+}
 
 /*
   TASK 2
@@ -36,9 +51,31 @@ function Person() {
         + The `drive` method should return a string "I ran out of fuel at x miles!" x being `odometer`.
 */
 
-function Car() {
+function Car(model, milesPerGallon) {
+  this.model= model;
+  this.milesPerGallon =milesPerGallon;
+  this.tank=0;
+  this.odometer=0;
+}
+
+Car.prototype.fill = function(gallons) {
+  this.tank += gallons
 
 }
+
+Car.prototype.drive = function(distance) {
+  this.tank -= distance/this.milesPerGallon;
+  if (this.tank <= 0 ) {
+    let diffDist = this.tank*this.milesPerGallon;
+    distance = distance +diffDist;
+    this.odometer += distance
+    return `I ran out of fuel at ${this.odometer} miles!`
+  } else{
+    this.odometer += distance
+  }
+}
+
+const car1 = new Car("Camry", 25)
 
 
 /*
@@ -49,18 +86,26 @@ function Car() {
         + Should return a string "Playing with x", x being the favorite toy.
 */
 
-function Baby() {
+function Baby(name, age, favoriteToy) {
+  this.name = name;
+  this.age = age;
+  this.favoriteToy = favoriteToy;
 
+}
+
+Baby.prototype = Object.create(Person.prototype)
+Baby.prototype.play = function() {
+  return `Playing with ${this.favoriteToy}`
 }
 
 
 /* 
   TASK 4
   In your own words explain the four principles for the "this" keyword below:
-  1. 
-  2. 
-  3. 
-  4. 
+  1. 'this' in window binding context allows for the program to bind a global variable in the window to 'this'
+  2. 'this' in implicit binding context determines that when called within a method in an object, 'this' refers to the object
+  3. 'this' in explicit binding context applies to .apply/.call function taking in an argument, which causes 'this' to be the passed argument.
+  4. 'this' in new binding context applies to constructer functions and the new objects created with the 'new' keyword. 'new' before a constructor function passing in an argument causes the argument to be applied as 'this.'
 */
 
 ///////// END OF CHALLENGE /////////
